@@ -1,87 +1,392 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>闫羽琳作品集</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <style type="text/css">
-        body{
-          background-image:url("背景.png");
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: cover;
-        }
-        .nav>li>a {
-    font-size: 25px;
-    font-weight: bold;
-    box-sizing: border-box;
-    border-top: 2px solid transparent;
-    margin-left: 5px;
-    margin-right:5px;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>闫羽琳 Yan Yulin · 作品</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c1a17'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%23f3efe9' font-family='serif'%3EY%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f3efe9; --ink:#1c1a17; --muted:#8a857c; --line:#ddd5c7; --faint:#c9c1b1;
+  --serif:"Noto Serif SC",Georgia,"Songti SC",serif;
+  --sans:"Noto Sans SC","PingFang SC",system-ui,sans-serif;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.75;font-size:16px}
+*{scrollbar-width:thin;scrollbar-color:var(--faint) var(--paper)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--paper)}
+::-webkit-scrollbar-thumb{background:var(--faint);border:2px solid var(--paper)}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 
-.nav>li>a {
-    color: #4f4f4f;
-}
+/* ===== 顶部导航 ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(243,239,233,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1080px;margin:0 auto;padding:14px 28px;display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.nav-name{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.06em}
+.nav-links{display:flex;gap:28px;font-size:13.5px;color:var(--muted)}
+.nav-links a{padding-bottom:2px;border-bottom:1px solid transparent}
+.nav-links a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+@media(max-width:640px){.nav-links{gap:16px;font-size:12.5px}.nav-in{padding:12px 18px}}
 
-.nav>li>a:focus,
-.nav>li>a:hover {
-    color: #f9f4dc;
-    border-top: 2px solid #f9f4dc;
-}
+/* ===== Hero ===== */
+.hero{padding:128px 28px 20px;max-width:1080px;margin:0 auto}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,5.5vw,54px);letter-spacing:.02em;line-height:1.25}
+.hero .tagline{margin-top:18px;font-family:var(--serif);font-size:clamp(16px,2.2vw,19px);color:#3a3631;max-width:640px;line-height:1.9}
+.hero .contact{margin-top:16px;font-size:13.5px;color:var(--muted);letter-spacing:.03em}
 
-.dropdown-menu>li>a:focus{
-  background-color: pink;
-}
+/* ===== 展览墙（无限横向丝带） ===== */
+.wall{margin:34px 0 6px;overflow-x:auto;overflow-y:hidden;padding:96px 28px 110px;scrollbar-width:thin;touch-action:pan-x;-webkit-overflow-scrolling:touch}
+.wall-track{display:flex;align-items:center;gap:30px;width:max-content}
+.g-item{position:relative;flex:0 0 auto;cursor:pointer}
+.g-item img{height:196px;width:auto;filter:grayscale(1) opacity(.55);transition:filter .35s ease,transform .35s ease}
+.g-item:nth-child(4n+1){margin-top:-54px}
+.g-item:nth-child(4n+2){margin-top:36px}
+.g-item:nth-child(4n+3){margin-top:-28px}
+.g-item:nth-child(4n){margin-top:44px}
+.g-item:nth-child(even) img{height:226px}
+.g-item:hover img{filter:grayscale(0) opacity(1);transform:scale(1.04)}
+.g-tag{position:absolute;left:50%;bottom:-32px;transform:translateX(-50%);white-space:nowrap;font-size:12px;color:var(--muted);opacity:0;transition:opacity .3s}
+.g-item:hover .g-tag{opacity:1}
+.g-cat{position:absolute;top:8px;left:8px;background:var(--ink);color:var(--paper);font-size:11px;padding:3px 9px;opacity:0;transition:opacity .3s}
+.g-item:hover .g-cat{opacity:1}
+.wall-hint{max-width:1080px;margin:0 auto;padding:0 28px;font-size:12.5px;color:var(--muted)}
 
-h1{
-  font-size: 50px;
-  text-align: center;
-  margin-top: 17%;
-  color:#ffffff;
-  text-shadow: 2px 2px 5px pink;
-}
+/* ===== 杂志板块通用 ===== */
+section{max-width:1080px;margin:0 auto;padding:72px 28px 16px;scroll-margin-top:56px}
+.v-item,.d-item,.i-item,.ai-row,.vi-grid,.poster-item,.p-item{scroll-margin-top:56px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;border-bottom:1.5px solid var(--ink);padding-bottom:16px;margin-bottom:40px}
+.sec-head h2{font-family:var(--serif);font-weight:900;font-size:clamp(26px,3.4vw,36px);letter-spacing:.03em}
+.sec-head span{font-size:12.5px;color:var(--muted);letter-spacing:.12em;white-space:nowrap}
 
-      h2{
-  font-size: 15px;
-  text-align: center;
-  margin-top: 17%;
-  color:#ffffff;
-  text-shadow: 2px 2px 5px pink;
-}
-  </style>
-  </head>
-  <body>
-<!-- 导航栏 -->
-    <ul class="nav nav-underline justify-content-center">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="poster design.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Graphic design
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="poster design.html">Poster design</a></li>
-          <li><a class="dropdown-item" href="VI design.html">VI design</a></li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="video.html">Video</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Wechat official account.html">Wechat official account</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Proposal.html">Proposal</a>
-      </li>
-    </ul>
-​<h1>Yan Yulin's<br>
-  Online Interactive Portfolios</h1>
-    <br></br>
-    <h2>若网站服务器出错，格式出现问题，请查看<a href="个人作品集.pdf">PDF版作品集</a></h2>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  </body>
+/* 视频：杂志双栏条目，无框 */
+.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px 40px}
+@media(max-width:760px){.v-grid{grid-template-columns:1fr;gap:38px}}
+.v-item video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;display:block}
+.v-item h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:14px 0 6px}
+.v-item p{font-size:14px;color:var(--muted);line-height:1.8}
+.v-item .v-meta{font-size:12px;color:var(--faint);margin-top:6px;letter-spacing:.05em}
+
+/* AI 短片：横排图文 */
+.ai-row{margin-top:52px;display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:center;border-top:1px solid var(--line);padding-top:32px}
+.ai-row video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;display:block}
+.ai-row h3{font-family:var(--serif);font-weight:700;font-size:20px;margin-bottom:10px}
+.ai-row p{font-size:14px;color:var(--muted);line-height:1.85}
+@media(max-width:760px){.ai-row{grid-template-columns:1fr}}
+
+/* 更多练习作品：醒目杂志手风琴 */
+.more{margin-top:56px;border-top:1.5px solid var(--ink)}
+.more summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:20px 0}
+.more summary::-webkit-details-marker{display:none}
+.more summary .m-title{font-family:var(--serif);font-weight:700;font-size:21px}
+.more summary .m-note{font-size:13px;color:var(--muted)}
+.more summary .m-arrow{font-family:var(--serif);font-size:22px;color:var(--muted);transition:transform .25s}
+.more[open] summary .m-arrow{transform:rotate(45deg)}
+.more-list{padding-bottom:10px}
+.d-item{display:grid;grid-template-columns:180px 1fr;gap:22px;align-items:center;padding:18px 0;border-top:1px solid var(--line)}
+.d-item video{width:180px;aspect-ratio:16/9;object-fit:cover;background:#000}
+.d-item h4{font-family:var(--serif);font-size:16.5px;font-weight:700}
+.d-item p{font-size:13px;color:var(--muted)}
+@media(max-width:760px){.d-item{grid-template-columns:1fr}.d-item video{width:100%;max-width:320px}}
+
+/* 互动：杂志三栏，无框 */
+.i-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+@media(max-width:900px){.i-grid{grid-template-columns:1fr;gap:34px}}
+.i-item img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;margin-bottom:16px;background:#e9e3d7}
+.i-item h3{font-family:var(--serif);font-weight:700;font-size:18.5px;margin-bottom:8px;line-height:1.5}
+.i-item p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.i-link{font-size:13.5px;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.i-link:hover{color:var(--muted);border-bottom-color:var(--muted)}
+.wx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+@media(max-width:900px){.wx-grid{grid-template-columns:1fr;gap:34px}}
+.wx-item img{width:100%;display:block;border:1px solid var(--line);margin-bottom:16px;background:#fff}
+.wx-item h3{font-family:var(--serif);font-weight:700;font-size:18.5px;margin-bottom:8px;line-height:1.5}
+.wx-item p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.wx-note{font-size:13.5px;color:var(--muted);line-height:1.8;margin:-8px 0 34px}
+.wx-award{display:inline-block;font-size:12px;border:1px solid var(--ink);padding:1px 9px;letter-spacing:.05em;margin-left:6px;vertical-align:1px}
+
+/* 品牌平面：画册陈列，无框 */
+.b-label{font-family:var(--serif);font-size:17px;font-weight:700;margin:6px 0 18px}
+.vi-cap{font-size:13.5px;color:var(--muted);margin:12px 0 30px;line-height:1.8;max-width:560px}
+.vi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:34px}
+.vi-mat{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:44px}
+.vi-tile{padding:16px;display:flex;flex-direction:column}
+.vi-tile .vbox{height:170px;display:flex;align-items:center;justify-content:center;flex:1}
+.vi-tile img{max-height:170px;max-width:100%;object-fit:contain}
+.vi-tile span{display:block;font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+@media(max-width:760px){.vi-grid,.vi-mat{grid-template-columns:repeat(2,1fr)}.vi-tile .vbox{height:140px}.vi-tile img{max-height:140px}}
+.poster-row{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.poster-item{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start}
+.poster-item img{width:150px;aspect-ratio:3/4;object-fit:cover}
+.poster-item .b-cap{font-size:13.5px;color:var(--muted);margin-top:2px;line-height:1.8}
+@media(max-width:760px){.poster-row{grid-template-columns:1fr;gap:28px}.poster-item{grid-template-columns:130px 1fr}.poster-item img{width:130px}}
+
+/* 策划案：杂志目录式 */
+.p-row{display:flex;flex-direction:column}
+.p-item{display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:center;padding:26px 0;border-top:1px solid var(--line)}
+.p-item:last-child{border-bottom:1px solid var(--line)}
+.p-cover{width:100%;max-width:230px;object-fit:contain;display:block}
+.p-body h3{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.6;margin-bottom:10px}
+.p-body p{font-size:14px;color:var(--muted);line-height:1.85}
+.p-award{display:inline-block;font-size:12px;border:1px solid var(--ink);padding:2px 10px;letter-spacing:.05em}
+.p-cover-link{display:block;max-width:230px;transition:opacity .2s}
+.p-cover-link:hover{opacity:.82}
+.p-open{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px}
+.p-open:hover{opacity:.6}
+@media(max-width:760px){.p-item{grid-template-columns:1fr;gap:12px}.p-cover{max-width:200px}}
+
+footer{max-width:1080px;margin:70px auto 0;padding:40px 28px 64px;border-top:1.5px solid var(--ink)}
+footer h2{font-family:var(--serif);font-weight:900;font-size:26px;margin-bottom:14px}
+footer p{font-size:15px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-name" href="#top">闫羽琳</a>
+    <div class="nav-links">
+      <a href="#video">视频</a>
+      <a href="#interactive">互动</a>
+      <a href="#brand">品牌平面</a>
+      <a href="#proposal">策划案</a>
+      <a href="#writing">内容</a>
+      <a href="#about">联系</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <h1>闫羽琳 Yan Yulin</h1>
+  <p class="tagline">中国传媒大学广告学本科 × 港大市场营销硕士，能独立完成视频、互动与品牌视觉的内容创作者。</p>
+  <p class="contact">18510239155　·　Lorna1219_yan@163.com</p>
+</header>
+
+<!-- 展览墙（JS 复制一份实现无限循环） -->
+<div class="wall" id="wall">
+  <div class="wall-track" id="wallTrack">
+    <a class="g-item" href="#v-tvc"><img src="assets/images/hbn.png" alt="TVC闪耀C位"><span class="g-cat">视频</span><span class="g-tag">TVC《闪耀C位》</span></a>
+    <a class="g-item" href="#v-campus"><img src="assets/images/校园采访.png" alt="校园采访"><span class="g-cat">视频</span><span class="g-tag">校园采访</span></a>
+    <a class="g-item" href="#v-psa"><img src="assets/images/公益广告.png" alt="公益广告"><span class="g-cat">视频</span><span class="g-tag">公益广告《敬业·不平凡》</span></a>
+    <a class="g-item" href="#v-jingju"><img src="assets/images/京剧.png" alt="京剧情"><span class="g-cat">视频</span><span class="g-tag">社团纪录《守望路，京剧情》</span></a>
+    <a class="g-item" href="#aigc"><img src="assets/images/ai-soulmate.jpg" alt="港大灵犀"><span class="g-cat">AIGC</span><span class="g-tag">AIGC短片《港大灵犀》</span></a>
+    <a class="g-item" href="#i-ddl"><img src="assets/images/ddl-crop.png" alt="DDL互动H5"><span class="g-cat">互动</span><span class="g-tag">七结局互动H5《完蛋我被DDL包围了》</span></a>
+    <a class="g-item" href="#i-drd"><img src="assets/images/drd-cover.png" alt="万圣节DRD"><span class="g-cat">互动</span><span class="g-tag">万圣节换装H5 · 交互设计文档</span></a>
+    <a class="g-item" href="#i-tool"><img src="assets/images/tool-ui.png" alt="简历排版工具"><span class="g-cat">互动</span><span class="g-tag">简历排版工具</span></a>
+    <a class="g-item" href="#b-vi"><img src="assets/images/logo-03.png" alt="crisp彩色logo"><span class="g-cat">品牌平面</span><span class="g-tag">crisp crisp 薯片 VI</span></a>
+    <a class="g-item" href="#p-huaying"><img src="assets/images/半夏的纪念海报_竹影.png" alt="竹影海报"><span class="g-cat">品牌平面</span><span class="g-tag">半夏的纪念影像展海报</span></a>
+    <a class="g-item" href="#p-xinnian"><img src="assets/images/新年海报x4.png" alt="兔年新年海报"><span class="g-cat">品牌平面</span><span class="g-tag">2023兔年新年海报</span></a>
+    <a class="g-item" href="#d-xushi"><img src="assets/images/自习室.png" alt="嘘别讲话"><span class="g-cat">视频</span><span class="g-tag">创意短剧《嘘！别讲话》</span></a>
+    <a class="g-item" href="#d-yan"><img src="assets/images/眼-封面.jpg" alt="眼"><span class="g-cat">视频</span><span class="g-tag">独居女性《眼》</span></a>
+    <a class="g-item" href="#d-temu"><img src="assets/images/TEMU.png" alt="TEMU"><span class="g-cat">视频</span><span class="g-tag">TEMU营销分析</span></a>
+    <a class="g-item" href="#d-yizhuan"><img src="assets/images/相遇.png" alt="一键换装"><span class="g-cat">视频</span><span class="g-tag">剪辑·舞台一键换装</span></a>
+    <a class="g-item" href="#d-yu"><img src="assets/images/陈情令.png" alt="伪预告"><span class="g-cat">视频</span><span class="g-tag">剪辑·伪电影预告</span></a>
+  </div>
+</div>
+<p class="wall-hint">左右滑动浏览 · 悬浮查看类别与作品名</p>
+
+<!-- ===== 视频创作 ===== -->
+<section id="video">
+  <div class="sec-head"><h2>视频创作</h2><span>VIDEO · 编导 / 拍摄 / 剪辑</span></div>
+  <div class="v-grid">
+    <div class="v-item" id="v-tvc">
+      <video controls preload="none" poster="assets/images/hbn.png" src="https://lorna-y.github.io/HBNfinal.mp4"></video>
+      <h3>TVC《闪耀C位》</h3>
+      <p>第15届大广赛HBN命题视频，北京赛区三等奖。女主角和朋友拍照时总能自动锁定C位，用情节化表达体现HBN发光水的使用效果。</p>
+    </div>
+    <div class="v-item" id="v-campus">
+      <video controls preload="none" poster="assets/images/校园采访.png" src="https://lorna-y.github.io/%E6%A0%A1%E5%9B%AD%E9%87%87%E8%AE%BF_1.mp4"></video>
+      <h3>校园采访《再给你一次机会，你还会选择中传吗》</h3>
+      <p>随机采访在校同学，是否还会选择来中传读书，呈现真实观点。</p>
+    </div>
+    <div class="v-item" id="v-psa">
+      <video controls preload="none" poster="assets/images/公益广告.png" src="https://lorna-y.github.io/%E5%85%AC%E7%9B%8A%E5%B9%BF%E5%91%8A.mp4"></video>
+      <h3>公益广告《敬业·不平凡》</h3>
+      <p>表达平凡人因敬业塑造非凡价值的主题。</p>
+    </div>
+    <div class="v-item" id="v-jingju">
+      <video controls preload="none" poster="assets/images/京剧.png" src="https://lorna-y.github.io/%E4%BA%AC%E5%89%A7.mp4"></video>
+      <h3>社团纪录《守望路，京剧情》</h3>
+      <p>中传京昆社的困难与发展纪实。</p>
+    </div>
+  </div>
+
+  <div class="ai-row" id="aigc">
+    <video controls preload="none" poster="assets/images/ai-soulmate.jpg" src="assets/video/ai-soulmate.m4v"></video>
+    <div>
+      <h3>AIGC短片《港大灵犀》</h3>
+      <p>港大7025课程项目。独立完成22镜头喜剧分镜（镜头运动、景别、时长、画面、人声、音效），豆包生图 → 即梦生成视频切片 → 自行剪辑 → 剪映配音成片；课堂作业，未发布。</p>
+    </div>
+  </div>
+
+  <details class="more" id="moreDetails">
+    <summary><span class="m-title">更多练习作品</span><span class="m-note">5 部 · 展开查看</span><span class="m-arrow">+</span></summary>
+    <div class="more-list">
+      <div class="d-item" id="d-xushi">
+        <video controls preload="none" poster="assets/images/自习室.png" src="https://lorna-y.github.io/%E5%98%98%EF%BC%81%E5%88%AB%E8%AE%B2%E8%AF%9D.mp4"></video>
+        <div><h4>创意短剧《嘘！别讲话》</h4><p>2:32，无限流剧情，主角找到跳出自习室循环的方法。</p></div>
+      </div>
+      <div class="d-item" id="d-yan">
+        <video controls preload="none" poster="assets/images/眼-封面.jpg" src="https://lorna-y.github.io/%E7%9C%BC.mp4"></video>
+        <div><h4>独居女性《眼》</h4><p>1:01，针孔摄像头社会议题短片。</p></div>
+      </div>
+      <div class="d-item" id="d-temu">
+        <video controls preload="none" poster="assets/images/TEMU.png" src="https://lorna-y.github.io/TEMU%E8%90%A5%E9%94%80%E5%88%86%E6%9E%90.mp4"></video>
+        <div><h4>TEMU营销分析</h4><p>4:59，英文分析TEMU成功与超级碗投放局限。</p></div>
+      </div>
+      <div class="d-item" id="d-yizhuan">
+        <video controls preload="none" poster="assets/images/相遇.png" src="https://lorna-y.github.io/%E3%80%8A%E7%9B%B8%E9%81%87%E3%80%8B%E4%B8%80%E9%94%AE%E6%8D%A2%E8%A3%85.mp4"></video>
+        <div><h4>剪辑·舞台一键换装</h4><p>3:48，同歌不同舞台按机位节奏剪辑衔接。</p></div>
+      </div>
+      <div class="d-item" id="d-yu">
+        <video controls preload="none" poster="assets/images/陈情令.png" src="https://lorna-y.github.io/%E9%99%88%E6%83%85%E4%BB%A4%E9%A2%84%E5%91%8A.mp4"></video>
+        <div><h4>剪辑·伪电影预告</h4><p>1:40，精彩片段快剪加音效营造紧张氛围。</p></div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ===== 互动作品 ===== -->
+<section id="interactive">
+  <div class="sec-head"><h2>互动作品</h2><span>INTERACTIVE · 交互设计 / 产品思维</span></div>
+  <div class="i-grid">
+    <div class="i-item" id="i-ddl">
+      <img src="assets/images/ddl-crop.png" alt="DDL H5">
+      <h3>《完蛋我被DDL包围了》七结局互动H5</h3>
+      <p>以赶due真实情境为背景的互动选择H5，每个选择导向不同结局。负责交互设计（视觉由协作同学完成）：七结局关卡框架（6个失败结局对应不同拖延原因，全对达成终极结局）、逐页交互逻辑与用户流程。已上线。</p>
+      <a class="i-link" href="https://file6bf283f5ce5b.v4.h5sys.cn/play/fasx36AA?version=2" target="_blank" rel="noopener">在线体验</a>
+    </div>
+    <div class="i-item" id="i-drd">
+      <img src="assets/images/drd-cover.png" alt="万圣节DRD">
+      <h3>万圣节《Trick or Treat》换装搜集H5 · 交互设计文档</h3>
+      <p>课程DRD作业，独立完成交互设计，未开发上线。设计背景、产品目标、目标用户（10-18岁青少年 / 20-30岁年轻人）、用户需求（创造/获取/社交）、用户流程图、信息架构（loading/首页/初始形象/游戏页/通关页）与逐页交互说明。</p>
+    </div>
+    <div class="i-item" id="i-tool">
+      <img src="assets/images/tool-ui.png" alt="简历排版工具">
+      <h3>简历排版工具（个人项目，AI结对开发）</h3>
+      <p>用纯文本Markdown写简历，免去Word反复调格式，自动排版并导出A4 PDF。定义结构化解析规则、动态列宽对齐方案、版块规则与AI格式规范Prompt；纯前端单文件HTML，4套主题。</p>
+      <a class="i-link" href="https://lorna-y.github.io/markdown-resume" target="_blank" rel="noopener">打开工具</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 品牌与平面 ===== -->
+<section id="brand">
+  <div class="sec-head"><h2>品牌与平面</h2><span>BRAND / GRAPHIC</span></div>
+  <p class="b-label">VI 设计 · crisp crisp 薯片品牌（独立完成）</p>
+  <p class="vi-cap">Crisp 一词双关"脆的 / 薯片"，叠词朗朗上口；图案为土豆被飞速下落的薯片切开而不碎，体现超薄超脆；配色取土豆原生色，传递天然无添加与食欲感。</p>
+  <div class="vi-grid" id="b-vi">
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/logo-01.png" alt="logo 线稿"></div><span>标志线稿</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/logo-02.png" alt="logo 黑稿"></div><span>标志黑稿</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/logo-03.png" alt="logo 彩色标准色"></div><span>标准色稿</span></div>
+  </div>
+  <div class="vi-mat">
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/名片正面.png" alt="名片正面"></div><span>名片 · 正面</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/名片背面.png" alt="名片背面"></div><span>名片 · 背面</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/明信片正面.png" alt="明信片正面"></div><span>明信片 · 正面</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/明信片背面.png" alt="明信片背面"></div><span>明信片 · 背面</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/信纸正面.png" alt="信纸正面"></div><span>信纸 · 正面</span></div>
+    <div class="vi-tile"><div class="vbox"><img src="assets/images/信纸背面.png" alt="信纸背面"></div><span>信纸 · 背面</span></div>
+  </div>
+  <p class="b-label">平面海报</p>
+  <div class="poster-row">
+    <div class="poster-item" id="p-huaying">
+      <img src="assets/images/半夏的纪念海报_竹影.png" alt="竹影海报">
+      <p class="b-cap">半夏的纪念北京（国际）大学生影像展海报："半"字化作窗棂，竹影象征青年创作者的开放交流窗口。</p>
+    </div>
+    <div class="poster-item" id="p-xinnian">
+      <img src="assets/images/新年海报x4.png" alt="兔年新年海报">
+      <p class="b-cap">2023兔年新年海报：传统文化（农历新年、卯兔、灯笼、爆竹）结合广告学院 AD 元素与广告博物馆符号。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 策划案 ===== -->
+<section id="proposal">
+  <div class="sec-head"><h2>策划案</h2><span>PROPOSAL · 调研 / 策略</span></div>
+  <div class="p-row">
+    <div class="p-item" id="pr-xilinmen">
+      <a class="p-cover-link" href="assets/pdf/xilinmen.pdf" target="_blank" rel="noopener">
+        <img class="p-cover" src="assets/images/proposal-xilinmen.png" alt="Dream Flow 策划案封面">
+      </a>
+      <div class="p-body">
+        <h3>第14届大广赛喜临门命题《Dream Flow》<br>全国优秀奖</h3>
+        <p>围绕大学生睡眠与床垫需求做问卷调研与数据分析，采用普遍性加特殊性结合，对流行 / 纯音乐 / 民谣三类人群做个性化营销，并配合整体营销策略。<br><span class="p-award">全国优秀奖</span><br><a class="p-open" href="assets/pdf/xilinmen.pdf" target="_blank" rel="noopener">查看完整策划案 PDF</a></p>
+      </div>
+    </div>
+    <div class="p-item" id="pr-fenghui">
+      <a class="p-cover-link" href="assets/pdf/fenghui.pdf" target="_blank" rel="noopener">
+        <img class="p-cover" src="assets/images/proposal-fenghui.png" alt="青丰踏花行策划案封面">
+      </a>
+      <div class="p-body">
+        <h3>丰惠古镇旅游策划《青"丰"踏花行》</h3>
+        <p>以梁祝文化、青梅文化造势，线上话题传播结合线下体验活动，逐步扩大辐射范围。<br><a class="p-open" href="assets/pdf/fenghui.pdf" target="_blank" rel="noopener">查看完整策划案 PDF</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 公众号内容 ===== -->
+<section id="writing">
+  <div class="sec-head"><h2>公众号内容</h2><span>CONTENT · 选题 / 文案 / 排版</span></div>
+  <p class="wx-note">在校学生会公众号独立完成选题、文案与图文排版，以下为代表篇目。</p>
+  <div class="wx-grid">
+    <div class="wx-item">
+      <img src="assets/images/我好像患上了“文字失语症”.png" alt="我好像患上了文字失语症">
+      <h3>我好像患上了"文字失语症"</h3>
+      <p>借网络热梗泛滥的日常，讨论表达退化、词不达意的"文字失语"现象。<span class="wx-award">获共青团中央转载</span></p>
+      <a class="i-link" href="https://mp.weixin.qq.com/s/T65gDKHOaRHtmgemLPLFCA" target="_blank" rel="noopener">阅读原文</a>
+    </div>
+    <div class="wx-item">
+      <img src="assets/images/请大数据把这篇推给正在拿着手机的UU.png" alt="请大数据把这篇推给正在拿着手机的UU">
+      <h3>请大数据把这篇推给正在拿着手机的UU</h3>
+      <p>从屏幕使用时间切入，讨论手机依赖如何悄悄偷走专注力与现实时间。</p>
+      <a class="i-link" href="https://mp.weixin.qq.com/s/JyVbfZpoiPjyhkMoQ-jywg" target="_blank" rel="noopener">阅读原文</a>
+    </div>
+    <div class="wx-item">
+      <img src="assets/images/气味回忆录.png" alt="气味回忆录">
+      <h3>气味回忆录丨如果回忆留香，CUC是什么味道</h3>
+      <p>借普鲁斯特效应写校园气味记忆，用感官串联大学生活片段。</p>
+      <a class="i-link" href="https://mp.weixin.qq.com/s/CdYb6kbBMEZObohBFGrv4Q" target="_blank" rel="noopener">阅读原文</a>
+    </div>
+  </div>
+</section>
+
+<footer id="about">
+  <h2>联系</h2>
+  <p>闫羽琳　18510239155　·　Lorna1219_yan@163.com</p>
+</footer>
+
+<script>
+(function(){
+  var wall=document.getElementById('wall');
+  // 滚轮垂直转动 -> 墙水平滚动
+  wall.addEventListener('wheel',function(e){
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+      e.preventDefault();
+      wall.scrollLeft += e.deltaY;
+    }
+  },{passive:false});
+  // 点击作品平滑定位；折叠作品先展开
+  wall.addEventListener('click',function(e){
+    var a=e.target.closest('.g-item');
+    if(!a) return;
+    var id=a.getAttribute('href')||'';
+    if(id.charAt(0)!=='#') return;
+    e.preventDefault();
+    if(id.indexOf('#d-')===0){
+      var det=document.getElementById('moreDetails');
+      if(det) det.open=true;
+    }
+    setTimeout(function(){
+      var el=document.querySelector(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    },100);
+  });
+})();
+</script>
+</body>
 </html>
